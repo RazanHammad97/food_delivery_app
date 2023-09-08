@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_app_razan/app_colors.dart';
+import 'package:food_delivery_app_razan/utils/app_colors.dart';
 import 'home/food_home_page.dart';
 
 void main() {
