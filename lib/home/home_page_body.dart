@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_app_razan/app_colors.dart';
 import 'package:food_delivery_app_razan/home/Icon_and_text_custom_widget.dart';
 import 'package:food_delivery_app_razan/widgets/big_text.dart';
 import 'package:food_delivery_app_razan/widgets/small_text.dart';
+import 'package:food_delivery_app_razan/utils/app_colors.dart';
 
 class HomePageBody extends StatefulWidget {
   const HomePageBody({super.key});
@@ -94,19 +94,29 @@ Widget _buildPageItem(int index) {
                     width: 10,
                   ),
                   SmallText("comments."),
-
                 ],
               ),
               SizedBox(
                 height: 20,
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconAndText(
                     icon: Icons.search,
-                    text: "Nornal",
+                    text: "Normal",
                     iconColor: AppColors.mainColor,
-                  )
+                  ),
+                  IconAndText(
+                    icon: Icons.map,
+                    text: "Normal",
+                    iconColor: AppColors.mainColor,
+                  ),
+                  IconAndText(
+                    icon: Icons.map,
+                    text: "Normal",
+                    iconColor: AppColors.mainColor,
+                  ),
                 ],
               )
             ],
