@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app_razan/screens/food/popular_food_details.dart';
+import 'package:food_delivery_app_razan/screens/food/recomended_food_detail.dart';
 import 'package:food_delivery_app_razan/utils/app_colors.dart';
-import 'home/food_home_page.dart';
 import 'package:get/get.dart';
 
 void main() {
@@ -19,7 +20,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.mainColor),
         useMaterial3: true,
       ),
-      home: const FoodHomePage(),
+      home: const RecomendedFoodDetail(),
+      // const FoodHomePage(),
     );
   }
 }

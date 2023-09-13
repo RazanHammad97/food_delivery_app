@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_app_razan/home/Icon_and_text_custom_widget.dart';
 import 'package:food_delivery_app_razan/utils/dimensions.dart';
 import 'package:food_delivery_app_razan/widgets/big_text.dart';
 import 'package:food_delivery_app_razan/widgets/small_text.dart';
 import 'package:food_delivery_app_razan/utils/app_colors.dart';
 import 'package:dots_indicator/dots_indicator.dart';
+
+import '../../widgets/app_column.dart';
+import 'Icon_and_text_custom_widget.dart';
 
 class HomePageBody extends StatefulWidget {
   const HomePageBody({super.key});
@@ -237,62 +239,7 @@ class _HomePageBodyState extends State<HomePageBody> {
                 top: Dimensions.height15,
                 left: Dimensions.width15,
                 right: Dimensions.width15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                BigText("Chineese Side"),
-                SizedBox(
-                  height: Dimensions.height10,
-                ),
-                Row(
-                  children: [
-                    Wrap(
-                      children: List.generate(
-                          5,
-                          (index) => Icon(
-                                Icons.star,
-                                color: AppColors.mainColor,
-                              )),
-                    ),
-                    SizedBox(
-                      width: Dimensions.width10,
-                    ),
-                    SmallText("4.5"),
-                    SizedBox(
-                      width: Dimensions.width10,
-                    ),
-                    SmallText("1287"),
-                    SizedBox(
-                      width: Dimensions.width10,
-                    ),
-                    SmallText("comments."),
-                  ],
-                ),
-                SizedBox(
-                  height: Dimensions.height20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconAndText(
-                      icon: Icons.search,
-                      text: "Normal",
-                      iconColor: AppColors.mainColor,
-                    ),
-                    IconAndText(
-                      icon: Icons.map,
-                      text: "Normal",
-                      iconColor: AppColors.mainColor,
-                    ),
-                    IconAndText(
-                      icon: Icons.map,
-                      text: "Normal",
-                      iconColor: AppColors.mainColor,
-                    ),
-                  ],
-                ),
-              ],
-            ),
+            child: AppColumn(text: "Chineese Side",)
           ),
         ),
       ),

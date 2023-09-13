@@ -17,6 +17,9 @@ class Dimensions {
   static double height150 = screenHeight/4.55;
   static double height5 = screenHeight/136.6;
   static double height2 = screenHeight/341.5;
+  static double iconSize16 = screenHeight/42.68;
+  static double popularSizeImage = screenHeight/1.95;
+  // static double bottomNavigationBarHeight = screenHeight/20;
 
 
 
@@ -39,5 +42,9 @@ class Dimensions {
 
   // font size
 static double font24 = screenHeight/28.45;
+  static double fontSize26 = screenHeight/26.26;
+  static double fontSize16 = screenHeight/42.68;
+
+
 
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery_app_razan/utils/dimensions.dart';
 import 'package:food_delivery_app_razan/widgets/big_text.dart';
 import 'package:food_delivery_app_razan/widgets/small_text.dart';
-import '../utils/app_colors.dart';
+import '../../utils/app_colors.dart';
 import 'home_page_body.dart';
 
 class FoodHomePage extends StatefulWidget {
