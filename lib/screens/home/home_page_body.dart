@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app_razan/controllers/popular_product_controller.dart';
+import 'package:food_delivery_app_razan/models/popular_product.dart';
+import 'package:food_delivery_app_razan/utils/app_constants.dart';
 import 'package:food_delivery_app_razan/utils/dimensions.dart';
 import 'package:food_delivery_app_razan/widgets/big_text.dart';
 import 'package:food_delivery_app_razan/widgets/small_text.dart';
 import 'package:food_delivery_app_razan/utils/app_colors.dart';
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:get/get.dart';
 
 import '../../widgets/app_column.dart';
 import 'Icon_and_text_custom_widget.dart';
@@ -41,35 +45,44 @@ class _HomePageBodyState extends State<HomePageBody> {
 
   @override
   Widget build(BuildContext context) {
-    print(MediaQuery.of(context).size.width);
-    print(MediaQuery.of(context).size.height);
+    // print(MediaQuery.of(context).size.width);
+    // print(MediaQuery.of(context).size.height);
     // print(_curPageIndex);
     return Column(
       children: [
-        Container(
-          height: Dimensions.height320,
-          child: PageView.builder(
-              onPageChanged: (index) {
-                print(index); //number of current page
-                // setState(() {});
-              },
-              controller: _controller,
-              itemCount: 5,
-              itemBuilder: (context, position) {
-                return _buildPageItem(position);
-              }),
+        GetBuilder<PopularProductController>(
+          builder: (popularProducts) {
+            return popularProducts.isLoaded?Container(
+              height: Dimensions.height320,
+              child: PageView.builder(
+                  onPageChanged: (index) {
+                    print(index); //number of current page
+                    // setState(() {});
+                  },
+                  controller: _controller,
+                  itemCount: popularProducts.popularProductList.length,
+                  itemBuilder: (context, position) {
+                    return _buildPageItem(
+                        position, popularProducts.popularProductList[position]);
+                  }),
+            ):Container();
+          },
         ),
-        new DotsIndicator(
-          dotsCount: 5,
-          position: _curPageIndex,
-          decorator: DotsDecorator(
-            activeColor: AppColors.mainColor,
-            size: Size.square(Dimensions.height9),
-            activeSize: Size(Dimensions.width18, Dimensions.height9),
-            activeShape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(Dimensions.radius5)),
-          ),
-        ),
+        GetBuilder<PopularProductController>(builder: (popularProducts) {
+          return DotsIndicator(
+            dotsCount: popularProducts.popularProductList.isEmpty
+                ? 1
+                : popularProducts.popularProductList.length,
+            position: _curPageIndex,
+            decorator: DotsDecorator(
+              activeColor: AppColors.mainColor,
+              size: Size.square(Dimensions.height9),
+              activeSize: Size(Dimensions.width18, Dimensions.height9),
+              activeShape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(Dimensions.radius5)),
+            ),
+          );
+        }),
         SizedBox(
           height: Dimensions.height30,
         ),
@@ -123,48 +136,53 @@ class _HomePageBodyState extends State<HomePageBody> {
                     ),
                     Expanded(
                       child: Container(
-                          padding: EdgeInsets.only(
-                              left: Dimensions.height20,
-                              right: Dimensions.height20),
-                          height: 100,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(Dimensions.height20),
-                                bottomRight:
-                                    Radius.circular(Dimensions.height20)),
-                          )
-                      
-                      ,child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [BigText("lorem ipsom lorem ipsom lorem ipsom"),
-                        SizedBox(height: Dimensions.height10,),
-                        SmallText("with the characteristics of china"),
-                        SizedBox(height: Dimensions.height10,),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              IconAndText(
-                                icon: Icons.search,
-                                text: "Normal",
-                                iconColor: AppColors.mainColor,
-                              ),
-                              // SizedBox(width: Dimensions.width2,),
-                              IconAndText(
-                                icon: Icons.map,
-                                text: "Normal",
-                                iconColor: AppColors.mainColor,
-                              ),
-                              IconAndText(
-                                icon: Icons.map,
-                                text: "Normal",
-                                iconColor: AppColors.mainColor,
-                              ),
-                            ],
-                          ),],
-
-                      ),),
+                        padding: EdgeInsets.only(
+                            left: Dimensions.height20,
+                            right: Dimensions.height20),
+                        height: 100,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(Dimensions.height20),
+                              bottomRight:
+                                  Radius.circular(Dimensions.height20)),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            BigText("lorem ipsom lorem ipsom lorem ipsom"),
+                            SizedBox(
+                              height: Dimensions.height10,
+                            ),
+                            SmallText("with the characteristics of china"),
+                            SizedBox(
+                              height: Dimensions.height10,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                IconAndText(
+                                  icon: Icons.search,
+                                  text: "Normal",
+                                  iconColor: AppColors.mainColor,
+                                ),
+                                // SizedBox(width: Dimensions.width2,),
+                                IconAndText(
+                                  icon: Icons.map,
+                                  text: "Normal",
+                                  iconColor: AppColors.mainColor,
+                                ),
+                                IconAndText(
+                                  icon: Icons.map,
+                                  text: "Normal",
+                                  iconColor: AppColors.mainColor,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
                     )
                   ],
                 ),
@@ -174,7 +192,7 @@ class _HomePageBodyState extends State<HomePageBody> {
     );
   }
 
-  Widget _buildPageItem(int index) {
+  Widget _buildPageItem(int index, ProductModel popularProduct) {
     // print(_curPageIndex.toString() + "current page index");
     // Matrix4 matrix = Matrix4.identity();
     // if (index == _curPageIndex.floor()) {
@@ -212,9 +230,11 @@ class _HomePageBodyState extends State<HomePageBody> {
             left: Dimensions.width10, right: Dimensions.width10),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(Dimensions.radius30),
-            color: index.isEven ? Colors.red : Colors.yellow,
+            // color: index.isEven ? Colors.red : Colors.yellow,
             image: DecorationImage(
-                image: AssetImage("assets/image01.jpg"), fit: BoxFit.cover)),
+                image:
+                    NetworkImage("${AppConstants.BASE_URL}/uploads/${popularProduct.img!}"),
+                fit: BoxFit.cover)),
       ),
       Align(
         alignment: Alignment.bottomCenter,
@@ -235,12 +255,13 @@ class _HomePageBodyState extends State<HomePageBody> {
                 color: Colors.white, offset: Offset(Dimensions.width5, 0)),
           ], borderRadius: BorderRadius.circular(30), color: Colors.white),
           child: Container(
-            padding: EdgeInsets.only(
-                top: Dimensions.height15,
-                left: Dimensions.width15,
-                right: Dimensions.width15),
-            child: AppColumn(text: "Chineese Side",)
-          ),
+              padding: EdgeInsets.only(
+                  top: Dimensions.height15,
+                  left: Dimensions.width15,
+                  right: Dimensions.width15),
+              child: AppColumn(
+                text: popularProduct.name!,
+              )),
         ),
       ),
     ]);

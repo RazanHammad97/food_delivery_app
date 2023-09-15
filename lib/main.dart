@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_app_razan/screens/food/popular_food_details.dart';
-import 'package:food_delivery_app_razan/screens/food/recomended_food_detail.dart';
+import 'package:food_delivery_app_razan/controllers/popular_product_controller.dart';
+import 'package:food_delivery_app_razan/screens/home/food_home_page.dart';
 import 'package:food_delivery_app_razan/utils/app_colors.dart';
+import 'package:food_delivery_app_razan/utils/app_constants.dart';
 import 'package:get/get.dart';
+import 'helper/dependencies.dart' as dep;
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dep.init();
   runApp(const MyApp());
 }
 
@@ -13,17 +17,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.find<PopularProductController>().getPopularProductList();
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Food Delivery App',
+      title: AppConstants.APP_NAME,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.mainColor),
         useMaterial3: true,
       ),
-      home: const RecomendedFoodDetail(),
-      // const FoodHomePage(),
+      home: const FoodHomePage(),
+      //
     );
   }
 }
-
-
