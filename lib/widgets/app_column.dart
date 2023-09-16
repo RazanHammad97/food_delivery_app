@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app_razan/widgets/small_text.dart';
-
-import '../screens/home/Icon_and_text_custom_widget.dart';
 import '../utils/app_colors.dart';
 import '../utils/dimensions.dart';
+import 'Icon_and_text_custom_widget.dart';
 import 'big_text.dart';
 
 class AppColumn extends StatelessWidget {

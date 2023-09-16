@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app_razan/routes/route_helper.dart';
+import 'package:food_delivery_app_razan/screens/food/recomended_food_detail.dart';
+import 'package:food_delivery_app_razan/screens/home/food_home_page.dart';
 import 'package:food_delivery_app_razan/utils/app_colors.dart';
 import 'package:food_delivery_app_razan/utils/dimensions.dart';
 import 'package:food_delivery_app_razan/widgets/app_column.dart';
 import 'package:food_delivery_app_razan/widgets/app_icon.dart';
+import 'package:get/get.dart';
 import '../../widgets/big_text.dart';
 import '../../widgets/expandable_text_custom_widget.dart';
 
@@ -33,7 +37,11 @@ class PopularFoodDetail extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppIcon(icon: Icons.arrow_back_ios),
+                GestureDetector(
+                    onTap: (){
+                      Get.toNamed(RouteHelper.getInitial());
+                    },
+                    child: AppIcon(icon: Icons.arrow_back_ios)),
                 AppIcon(icon: Icons.shopping_cart_outlined)
               ],
             ),
