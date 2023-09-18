@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app_razan/controllers/recommended_products_controller.dart';
 import 'package:food_delivery_app_razan/routes/route_helper.dart';
 import 'package:food_delivery_app_razan/utils/app_colors.dart';
+import 'package:food_delivery_app_razan/utils/app_constants.dart';
 import 'package:food_delivery_app_razan/utils/dimensions.dart';
 import 'package:food_delivery_app_razan/widgets/app_icon.dart';
 import 'package:food_delivery_app_razan/widgets/big_text.dart';
 import 'package:food_delivery_app_razan/widgets/expandable_text_custom_widget.dart';
 import 'package:get/get.dart';
 class RecomendedFoodDetail extends StatelessWidget {
-  const RecomendedFoodDetail({super.key});
+   final int pageId;
+   RecomendedFoodDetail({super.key, required this.pageId});
 
   @override
   Widget build(BuildContext context) {
+    var product = Get.find<RecommendedProductController>().recommendedProductList[pageId];
     return Scaffold(
       backgroundColor: Colors.white,
       // appBar: AppBar(),
@@ -46,7 +50,7 @@ class RecomendedFoodDetail extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.center,
                     child: BigText(
-                      "Chinese Side",
+                      "${product.name}",
                       color: Colors.black54,
                     ),
                   )),
@@ -57,8 +61,8 @@ class RecomendedFoodDetail extends StatelessWidget {
             backgroundColor: AppColors.mainColor,
             expandedHeight: 350,
             flexibleSpace: FlexibleSpaceBar(
-              background: Image.asset(
-                "assets/image01.jpg",
+              background: Image.network(
+                "${AppConstants.BASE_URL}${AppConstants.UPLOADS_URL}${product.img!}",
                 width: double.maxFinite,
                 fit: BoxFit.cover,
               ),
@@ -72,7 +76,7 @@ class RecomendedFoodDetail extends StatelessWidget {
                       left: Dimensions.width10, right: Dimensions.width10),
                   child: ExpandableTextCustomWidget(
                     text:
-                        'lkffffffffffflkfffffffflkfflkffffffffffflkfffffffflkffffffffffflkfffffffffffffffffffffffffffffffffffshhhhhhhlkfffffffffffffffffffffffffffffffffffshhhhhhhffffffffffffffffffffffffshhhhhhhfffffffffffffffffffffffffffshhhhhhhlkffffffffffffffffffffffffffffffflkffffffffffflkfffffffflkfflkffffffffffflkfffffffflkffffffffffflkfffffffffffffffffffffffffffffffffffshhhhhhhlkfffffffffffffffffffffffffffffffffffshhhhhhhffffffffffffffffffffffffshhhhhhhfffffffffffffffffffffffffffshhhhhhhlkfffffffffffffffffffffffffffffffffffshhhhhhhffffffffffffffffffffffffshhhhhhhffffffffflkfffffffffffffffffffffffffffffffffffshhhhhhhlkfffffffffffffffffffffffffffffffffffshhhhhhhffffffffffffffffffffffffshhhhhhhfffffffffffffffffffffffffffshhhhhhhlkfffffffffffffffffffffffffffffffffffshhhhhhhffffffffffffffffffffffffshhhhhhhffffshhhhhhhffffffffffffffffffffffffshhhhhhhffffffffflkfffffffffffffffffffffffffffffffffffshhhhhhhlkfffffffffffffffffffffffffffffffffffshhhhhhhffffffffffffffffffffffffshhhhhhhfffffffffffffffffffffffffffshhhhhhhlkfffffffffffffffffffffffffffffffffffshhhhhhhffffffffffffffffffffffffshhhhhhh',
+                        '${product.description!}',
                   ),
                 ),
               ],
@@ -144,7 +148,7 @@ class RecomendedFoodDetail extends StatelessWidget {
                     color: AppColors.mainColor,
                   ),
                   child: BigText(
-                    "\$10 | Add to cart",
+                    "\$ ${product.price} | Add to cart",
                     color: Colors.white,
                   ),
                 )

@@ -9,7 +9,7 @@ class RouteHelper {
 // use this approach (functions) to process parameters in future and call this function from the ui
   static String getFoodPopularDetail(int pageId) => "$POPULAR_FOOD_PAGE?pageId=$pageId";
   static String getInitial() => INITIAL;
-  static String getRecommendedFoodDetail() => RECOMMENDED_FOOD_DETAIL;
+  static String getRecommendedFoodDetail(int pageId) => "$RECOMMENDED_FOOD_DETAIL?recoPageId=$pageId";
 
  static  List<GetPage> routes =[
     GetPage(name: INITIAL, page: ()=> FoodHomePage()),
@@ -18,7 +18,10 @@ class RouteHelper {
       return PopularFoodDetail(pageId:int.parse(pageId!));},
     transition: Transition.leftToRightWithFade
     ),
-   GetPage(name: RECOMMENDED_FOOD_DETAIL, page: ()=> RecomendedFoodDetail(),
+   GetPage(name: RECOMMENDED_FOOD_DETAIL, page: () {
+     var pageId = Get.parameters['recoPageId'];
+     return RecomendedFoodDetail(pageId :int.parse(pageId!));
+   },
        transition: Transition.leftToRightWithFade
    ),
 

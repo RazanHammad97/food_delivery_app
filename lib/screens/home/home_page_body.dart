@@ -126,7 +126,7 @@ class _HomePageBodyState extends State<HomePageBody> {
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () {
-                    Get.toNamed(RouteHelper.getRecommendedFoodDetail());
+                    Get.toNamed(RouteHelper.getRecommendedFoodDetail(index));
                   },
                   child: Container(
                     margin: EdgeInsets.only(
