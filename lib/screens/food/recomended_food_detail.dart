@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app_razan/routes/route_helper.dart';
 import 'package:food_delivery_app_razan/utils/app_colors.dart';
 import 'package:food_delivery_app_razan/utils/dimensions.dart';
 import 'package:food_delivery_app_razan/widgets/app_icon.dart';
 import 'package:food_delivery_app_razan/widgets/big_text.dart';
 import 'package:food_delivery_app_razan/widgets/expandable_text_custom_widget.dart';
-
+import 'package:get/get.dart';
 class RecomendedFoodDetail extends StatelessWidget {
   const RecomendedFoodDetail({super.key});
 
@@ -16,11 +17,16 @@ class RecomendedFoodDetail extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
+            automaticallyImplyLeading: false,
             toolbarHeight: 70,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppIcon(icon: Icons.clear),
+                GestureDetector(
+                    onTap:() {
+                      Get.toNamed(RouteHelper.getInitial());
+                    },
+                    child: AppIcon(icon: Icons.clear)),
                 AppIcon(icon: Icons.shopping_cart_outlined)
               ],
             ),
